@@ -1,0 +1,97 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Eric Grau">
+   <meta name="GENERATOR" content="Mozilla/4.72 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>MySQL</title>
+</head>
+<body bgcolor="#FFCC00">
+
+<center><a href="http://www.icarz.com/"><img SRC="cal_logo.jpg" height=49 width=171></a></center>
+
+<p><br>
+<table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER BGCOLOR="#7057E7"><b><font size=+2>MyVbQL.dll</font></b></td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER>
+<br><b><font size=+1>VERSION 2.0.0</font></b></td>
+</tr>
+
+<tr>
+<td>
+<br>MYSQL_CONNECTION object changes:
+<br>&nbsp;&nbsp;&nbsp; - fixed OpenConnection method returning incorrect
+state upon successful connection
+<br>&nbsp;&nbsp;&nbsp; - added AutoUpdate property
+<br>&nbsp;&nbsp;&nbsp; - added LastInsertID method
+<br>&nbsp;&nbsp;&nbsp; - added QueryString property
+<br>&nbsp;&nbsp;&nbsp; - added Ping method
+<p>MYSQL_RS object changes:
+<br>&nbsp;&nbsp;&nbsp; - changed object Instancing property to PublicNotCreatable
+<br>&nbsp;&nbsp;&nbsp; - fixed EOF property returning incorrect value when
+record count = 0
+<br>&nbsp;&nbsp;&nbsp; - added RsToHtmlTable method
+<br>&nbsp;&nbsp;&nbsp; - added AddNew method
+<br>&nbsp;&nbsp;&nbsp; - added Update method
+<br>&nbsp;&nbsp;&nbsp; - added CancelUpdate method
+<br>&nbsp;&nbsp;&nbsp; - added Delete method
+<br>&nbsp;&nbsp;&nbsp; - added Requery method
+<br>&nbsp;&nbsp;&nbsp; - added MYSQL_EDIT_MODE enum
+<br>&nbsp;&nbsp;&nbsp; - added EditMode property
+<br>&nbsp;&nbsp;&nbsp; - added Table property
+<br>&nbsp;&nbsp;&nbsp; - added TableCount property
+<p>MYSQL_FIELD changes:
+<br>&nbsp;&nbsp;&nbsp; - added "Let" to Value property
+<br>&nbsp;&nbsp;&nbsp; - added Table property
+<br>&nbsp;&nbsp;&nbsp; - added MYSQL_FIELD_FLAGS enum
+<br>&nbsp;&nbsp;&nbsp; - added Flags property
+<br>&nbsp;&nbsp;&nbsp; - added Length property
+<br>&nbsp;&nbsp;&nbsp; - added MaxLength property
+<br>&nbsp;&nbsp;&nbsp; - added Decimals property
+<br>&nbsp;</td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER>
+<br><b><font size=+1>VERSION 1.0.1</font></b></td>
+</tr>
+
+<tr>
+<td>
+<br>MYSQL_CONNECTION object changes:
+<br>&nbsp;&nbsp;&nbsp; - added Flush method
+<br>MYSQL_RS object changes:
+<br>&nbsp;&nbsp;&nbsp; - added FindFirst, FindLast, FindNext, and FindPrevious
+methods (thanks to Gregg Housh gregghoush@mediaone.net for the contribution!)
+<br>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#7057E7">
+<center><b><font size=+2>MyTool.exe</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td ALIGN=CENTER>
+<br><b><font size=+1>VERSION 1.0.2</font></b></td>
+</tr>
+
+<tr>
+<td>
+<br>&nbsp;Minor bug fixes.
+<br>&nbsp;</td>
+</tr>
+</table>
+
+<p>Copyright (C) 2000,2001 icarz, Inc.&nbsp; MyTool.exe falls under the
+terms of the <a href="GPL.txt">GNU General Public License</a>.&nbsp; MyVbQL.dll
+falls under the terms of the <a href="LGPL.txt">GNU Library General Public
+License</a>.
+<br>Please send questions, comments, and changes to <a href="mailto:mysql@icarz.com">mysql@icarz.com</a>
+</body>
+</html>
