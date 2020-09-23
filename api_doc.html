@@ -1,0 +1,1092 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Eric Grau">
+   <meta name="GENERATOR" content="Mozilla/4.72 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>MySQL</title>
+</head>
+<body bgcolor="#FFCC00">
+
+<center><a href="http://www.icarz.com/"><img SRC="cal_logo.jpg" height=49 width=171></a>
+<p><b>The following is documentation for the objects provided by the MyVbQL
+API:</b></center>
+
+<center><table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER BGCOLOR="#7057E7"><a NAME="MYSQL_CONNECTION"></a><b>MYSQL_CONNECTION</b></td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Enum</b></td>
+
+<td BGCOLOR="#7057E7"><b>Values</b></td>
+</tr>
+
+<tr>
+<td>MYSQL_CONNECTION_STATE</td>
+
+<td>MY_CONN_OPEN = 0
+<br>MY_CONN_CLOSED = 1</td>
+</tr>
+
+<tr>
+<td>MYSQL_OPTION</td>
+
+<td>MYSQL_OPT_CONNECT_TIMEOUT = 0
+<br>MYSQL_OPT_COMPRESS = 1
+<br>MYSQL_OPT_NAMED_PIPE = 2
+<br>MYSQL_INIT_COMMAND = 3
+<br>MYSQL_READ_DEFAULT_FILE = 4
+<br>MYSQL_READ_DEFAULT_GROUP = 5</td>
+</tr>
+
+<tr>
+<td>MYSQL_FLAG</td>
+
+<td>CLIENT_LONG_PASSWORD = 1
+<br>CLIENT_FOUND_ROWS = 2
+<br>CLIENT_LONG_FLAG = 4
+<br>CLIENT_CONNECT_WITH_DB = 8
+<br>CLIENT_NO_SCHEMA = 16
+<br>CLIENT_COMPRESS = 32
+<br>CLIENT_ODBC = 64
+<br>CLIENT_LOCAL_FILES = 128
+<br>CLIENT_IGNORE_SPACE = 256
+<br>CLIENT_CHANGE_USER = 512
+<br>CLIENT_INTERACTIVE = 1024
+<br>CLIENT_SSL = 2048
+<br>CLIENT_IGNORE_SIGPIPE = 4096
+<br>CLIENT_TRANSACTIONS = 8196</td>
+</tr>
+
+<tr>
+<td>MYSQL_FLUSH</td>
+
+<td>MY_FLUSH_ALL = 0
+<br>MY_FLUSH_HOSTS = 1
+<br>MY_FLUSH_LOGS = 2
+<br>MY_FLUSH_PRIVILEGES = 3
+<br>MY_FLUSH_STATUS = 4
+<br>MY_FLUSH_TABLES = 5</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Property</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Type</b></td>
+</tr>
+
+<tr>
+<td>Error</td>
+
+<td>Returns an error object.</td>
+
+<td>MYSQL_ERR</td>
+</tr>
+
+<tr>
+<td>State</td>
+
+<td>Returns the state of the MYSQL_CONNECTION object.</td>
+
+<td>MYSQL_CONNECTION_STATE</td>
+</tr>
+
+<tr>
+<td>Hostname</td>
+
+<td>Returns the host name used to establish the current connection.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>Username</td>
+
+<td>Returns the user name used to establish the current connection.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>Password</td>
+
+<td>Returns the password used to establish the current connection.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>DbName</td>
+
+<td>Returns the name of the database associated with the current connection.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>AutoUpdate</td>
+
+<td>Returns/sets the auto update option which is used to determine if changes/additions
+to the recordset are automatically saved when changing rows, requering
+the dataset, closing the recordset, etc.</td>
+
+<td>Boolean</td>
+</tr>
+
+<tr>
+<td>QueryString</td>
+
+<td>Returns the most recently executed query.</td>
+
+<td>String</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Method</b></td>
+
+<td BGCOLOR="#7057E7"><b>Desription</b></td>
+
+<td BGCOLOR="#7057E7"><b>Return Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Description</b></td>
+</tr>
+
+<tr>
+<td ROWSPAN="2">SetOption</td>
+
+<td ROWSPAN="2">Used to set the options that will be sent to the server
+when atttempting to make a connection.&nbsp; Can called multiple times
+to set more than one option.</td>
+
+<td ROWSPAN="2">None</td>
+
+<td>eOption</td>
+
+<td>MYSQL_OPTION</td>
+
+<td>Detemines which connection option is being set.</td>
+</tr>
+
+<tr>
+<td>sArg</td>
+
+<td>String</td>
+
+<td>Optional argument (default = "") used to specify any additional information
+needed to set the option (not required for all options).</td>
+</tr>
+
+<tr>
+<td>ClearOptions</td>
+
+<td>Clears any connection options previously set by the SetOption method.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td ROWSPAN="6">OpenConnection</td>
+
+<td ROWSPAN="6">Attempts to connect to a MySQL server.</td>
+
+<td ROWSPAN="6">MYSQL_CONNECTION_STATE</td>
+
+<td>sHostName</td>
+
+<td>String</td>
+
+<td>The host name of the MySQL server to connect to.</td>
+</tr>
+
+<tr>
+<td>sUserName</td>
+
+<td>String</td>
+
+<td>The user name to use when connecting to the MySQL server.</td>
+</tr>
+
+<tr>
+<td>sPassword</td>
+
+<td>String</td>
+
+<td>The password to use when connecting to the MySQL server.</td>
+</tr>
+
+<tr>
+<td>sDbName</td>
+
+<td>String</td>
+
+<td>The database to use.&nbsp; If this parameter is a zero-length string
+(""), no initial database is selected.</td>
+</tr>
+
+<tr>
+<td>lPortNum</td>
+
+<td>Long</td>
+
+<td>Optional argument (default&nbsp; = 3306) to specify the port number
+of the MySQL server to connect to.</td>
+</tr>
+
+<tr>
+<td>lFlags</td>
+
+<td>MYSQL_FLAG</td>
+
+<td>Optional argument (default&nbsp; = 0) to specify one or more options
+that affect the operation of the server (multiple options can be combined
+using '+').</td>
+</tr>
+
+<tr>
+<td>CloseConnection</td>
+
+<td>Closes a connection previously made by the OpenConnection method.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>SelectDb</td>
+
+<td>Changes the database for the current connection.</td>
+
+<td>Boolean</td>
+
+<td>sDbName</td>
+
+<td>String</td>
+
+<td>The database to use.</td>
+</tr>
+
+<tr>
+<td ROWSPAN="2">Execute</td>
+
+<td ROWSPAN="2">Executes an SQL query.&nbsp; For row returning queries,
+the data can be accessed from the MYSQL_RS object that&nbsp; is returned.&nbsp;</td>
+
+<td ROWSPAN="2">MYSQL_RS</td>
+
+<td>sSQL</td>
+
+<td>String</td>
+
+<td>SQL query to execute.</td>
+</tr>
+
+<tr>
+<td>lRecordsAffected</td>
+
+<td>Long</td>
+
+<td>Optional argument (default&nbsp; = 0) that can be used to obtain the
+number of rows affected by a query (INSERT, UPDATE, DELETE) or the number
+of rows returned by a query (SELECT).</td>
+</tr>
+
+<tr>
+<td>QueryInfo</td>
+
+<td>Returns information about the effect of the most recently executed
+query.</td>
+
+<td>String</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Flush</td>
+
+<td>Runs the MySQL FLUSH statement on the database.</td>
+
+<td>None</td>
+
+<td>FlushType</td>
+
+<td>MYSQL_FLUSH</td>
+
+<td>The type of FLUSH statement to run on the database.</td>
+</tr>
+
+<tr>
+<td>LastInsertID</td>
+
+<td>Return the AUTO_INCREMENT value generated by the most recently executed
+query.</td>
+
+<td>Long</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Ping</td>
+
+<td>Checks if connection is still active.&nbsp; If not, reconnect using
+the same parameters used to initially make the connection.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER BGCOLOR="#7057E7"><a NAME="MYSQL_RS"></a><b>MYSQL_RS</b></td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Enum</b></td>
+
+<td BGCOLOR="#7057E7"><b>Values</b></td>
+</tr>
+
+<tr>
+<td>MYSQL_RECORDSET_STATE</td>
+
+<td>MY_RS_OPEN = 0
+<br>MY_RS_CLOSED = 1</td>
+</tr>
+
+<tr>
+<td>MYSQL_ABSOLUTE_POSITION</td>
+
+<td>MY_POS_BOF = -3
+<br>MY_POS_EOF = -2
+<br>MY_POS_UNKNOWN = -1</td>
+</tr>
+
+<tr>
+<td>MYSQL_FIND</td>
+
+<td>MY_FIND_AND_RETURN_POSITION_ONLY = 1
+<br>MY_FIND_GOTO_RECORD_AND_RETURN_POSITION = 2</td>
+</tr>
+
+<tr>
+<td>MYSQL_EDIT_MODE</td>
+
+<td>MY_EDIT_NONE = 0
+<br>MY_EDIT_IN_PROGRESS = 1
+<br>MY_EDIT_ADD = 2
+<br>MY_EDIT_DELETE = 3</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Property</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Type</b></td>
+</tr>
+
+<tr>
+<td>State</td>
+
+<td>Returns the state of the MYSQL_RS object.</td>
+
+<td>MYSQL_RECORDSET_STATE</td>
+</tr>
+
+<tr>
+<td>AffectedRecords</td>
+
+<td>Returns the number of rows affected by a query (INSERT, UPDATE, DELETE)
+or the number of rows returned by a query (SELECT).</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>QueryString</td>
+
+<td>Returns the query used to generate the recordset.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>RecordCount</td>
+
+<td>Returns the number of records in a row returning query (SELECT).</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>FieldCount</td>
+
+<td>Returns the number of columns in a row returning query (SELECT).</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>Fields</td>
+
+<td>Returns a&nbsp; field object.</td>
+
+<td>MYSQL_FIELD</td>
+</tr>
+
+<tr>
+<td>BOF</td>
+
+<td>Returns whether or not the MYSQL_RS obejct is at the BOF marker.</td>
+
+<td>Boolean</td>
+</tr>
+
+<tr>
+<td>EOF</td>
+
+<td>Returns whether or not the MYSQL_RS obejct is at the EOF marker.</td>
+
+<td>Boolean</td>
+</tr>
+
+<tr>
+<td>AbsolutePosition</td>
+
+<td>Returns or sets the position of a recordset's current record from 1
+to RecordCount, or returns one of the MYSQL_ABSOLUTE_POSITION values.</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>EditMode</td>
+
+<td>Returns the edit mode of the result set.</td>
+
+<td>MYSQL_EDIT_MODE</td>
+</tr>
+
+<tr>
+<td>Table</td>
+
+<td>Returns the name(s) of the tables in this result set.&nbsp; If there
+are more that one table, the names will be separated by commas.</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>TableCount</td>
+
+<td>Returns the number of tables in this result set.</td>
+
+<td>Long</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Method</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Return Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Description</b></td>
+</tr>
+
+<tr>
+<td>MoveFirst</td>
+
+<td>Moves the current records position to the first record in the recordset.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>MoveLast</td>
+
+<td>Moves the current records position to the last record in the recordset.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>MovePrevious</td>
+
+<td>Moves the current records position to the previous record in the recordset.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>MoveNext</td>
+
+<td>Moves the current records position to the next record in the recordset.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>CloseRecordset</td>
+
+<td>Closes the MYSQL_RS object and releases any resources.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td ROWSPAN="3">FindFirst</td>
+
+<td ROWSPAN="3">Finds the first record containing specified data in the
+given field.&nbsp; Returns the record number if a match if found otherwise
+-1 is returned.</td>
+
+<td ROWSPAN="3">Long</td>
+
+<td>vField</td>
+
+<td>Variant</td>
+
+<td>Name or number (0 to FieldCount-1) of the field being searched.</td>
+</tr>
+
+<tr>
+<td>vData</td>
+
+<td>Variant</td>
+
+<td>Data to search for in the given field.</td>
+</tr>
+
+<tr>
+<td>FindMethod</td>
+
+<td>MYSQL_FIND</td>
+
+<td>See Enum definition.</td>
+</tr>
+
+<tr>
+<td ROWSPAN="3">FindLast</td>
+
+<td ROWSPAN="3">Finds the last record containing specified data in the
+given field.&nbsp; Returns the record number if a match if found otherwise
+-1 is returned.</td>
+
+<td ROWSPAN="3">Long</td>
+
+<td>vField</td>
+
+<td>Variant</td>
+
+<td>Name or number (0 to FieldCount-1) of the field being searched.</td>
+</tr>
+
+<tr>
+<td>vData</td>
+
+<td>Variant</td>
+
+<td>Data to search for in the given field.</td>
+</tr>
+
+<tr>
+<td>FindMethod</td>
+
+<td>MYSQL_FIND</td>
+
+<td>See Enum definition.</td>
+</tr>
+
+<tr>
+<td ROWSPAN="3">FindNext</td>
+
+<td ROWSPAN="3">Finds the next record containing specified data in the
+given field.&nbsp; Returns the record number if a match if found otherwise
+-1 is returned.</td>
+
+<td ROWSPAN="3">Long</td>
+
+<td>vField</td>
+
+<td>Variant</td>
+
+<td>Name or number (0 to FieldCount-1) of the field being searched.</td>
+</tr>
+
+<tr>
+<td>vData</td>
+
+<td>Variant</td>
+
+<td>Data to search for in the given field.</td>
+</tr>
+
+<tr>
+<td>FindMethod</td>
+
+<td>MYSQL_FIND</td>
+
+<td>See Enum definition.</td>
+</tr>
+
+<tr>
+<td ROWSPAN="3">FindPrevious</td>
+
+<td ROWSPAN="3">Finds the previous record containing specified data in
+the given field.&nbsp; Returns the record number if a match if found otherwise
+-1 is returned.</td>
+
+<td ROWSPAN="3">Long</td>
+
+<td>vField</td>
+
+<td>Variant</td>
+
+<td>Name or number (0 to FieldCount-1) of the field being searched.</td>
+</tr>
+
+<tr>
+<td>vData</td>
+
+<td>Variant</td>
+
+<td>Data to search for in the given field.</td>
+</tr>
+
+<tr>
+<td>FindMethod</td>
+
+<td>MYSQL_FIND</td>
+
+<td>See Enum definition.</td>
+</tr>
+
+<tr>
+<td>RsToHtmlTable</td>
+
+<td>Creates an HTML table based on the data in the record set.</td>
+
+<td>String</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>AddNew</td>
+
+<td>Enables add mode so any field value "lets" will cause a record to be
+inserted when the Update method is called.&nbsp; Returns -1 if add mode
+cannot be enabled.</td>
+
+<td>Long</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Update</td>
+
+<td>Updates any changes to the current row when EditMode is MY_EDIT_IN_PROGRESS
+or adds a new record when EditMode is MY_EDIT_ADD.&nbsp; Return value is
+-1 if an update is not allowed otherwise the return value is the number
+of records affected in the database.</td>
+
+<td>Long</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>CancelUpdate</td>
+
+<td>Cancels any edits in progress.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Delete</td>
+
+<td>Delete the current row.&nbsp; Returns -1 if a delete is not allowed
+otherwise the return value is the number of records affected in the database.</td>
+
+<td>Long</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Requery</td>
+
+<td>Requeries the record set.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td></td>
+
+<td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<br>&nbsp;
+<table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER BGCOLOR="#7057E7"><a NAME="MYSQL_FIELD"></a><b>MYSQL_FIELD</b>
+(not creatable)</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Enum</b></td>
+
+<td BGCOLOR="#7057E7"><b>Values</b></td>
+</tr>
+
+<tr>
+<td>MYSQL_FIELD_TYPES</td>
+
+<td>MYSQL_DECIMAL = 0
+<br>MYSQL_TINYINT = 1
+<br>MYSQL_SMALLINT = 2
+<br>MYSQL_INT = 3
+<br>MYSQL_FLOAT = 4&nbsp;
+<br>MYSQL_DOUBLE = 5
+<br>MYSQL_NULL = 6
+<br>MYSQL_TIMESTAMP = 7
+<br>MYSQL_BIGINT = 8
+<br>MYSQL_MEDIUMINT = 9
+<br>MYSQL_DATE = 10
+<br>MYSQL_TIME = 11
+<br>MYSQL_DATETIME = 12
+<br>MYSQL_YEAR = 13
+<br>MYSQL_NEWDATE = 14
+<br>MYSQL_ENUM = 247
+<br>MYSQL_SET = 248
+<br>MYSQL_TINYBLOB = 249
+<br>MYSQL_MEDIUMBLOB = 250
+<br>MYSQL_LONGBLOB = 251
+<br>MYSQL_BLOB = 252
+<br>MYSQL_VARCHAR = 253
+<br>MYSQL_CHAR = 254</td>
+</tr>
+
+<tr>
+<td>MYSQL_FIELD_FLAGS</td>
+
+<td>MY_NOT_NULL_FLAG = 1
+<br>MY_PRI_KEY_FLAG = 2
+<br>MY_UNIQUE_KEY_FLAG = 4
+<br>MY_MULTIPLE_KEY_FLAG = 8
+<br>MY_BLOB_FLAG = 16
+<br>MY_UNSIGNED_FLAG = 32
+<br>MY_ZEROFILL_FLAG = 64
+<br>MY_BINARY_FLAG = 128
+<br>MY_ENUM_FLAG = 256
+<br>MY_AUTO_INCREMENT_FLAG = 512
+<br>MY_TIMESTAMP_FLAG = 1024
+<br>MY_SET_FLAG = 2048</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Property</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Type</b></td>
+</tr>
+
+<tr>
+<td>Name</td>
+
+<td>Returns the name of the field.&nbsp; Fields can be reference by name
+or number (0 to FieldCount-1).</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>MySqlType</td>
+
+<td>Returns the type of the field.&nbsp; Fields can be reference by name
+or number (0 to FieldCount-1).</td>
+
+<td>MYSQL_FIELD_TYPES</td>
+</tr>
+
+<tr>
+<td>Value</td>
+
+<td>Returns/sets the value of the field.&nbsp; If the field has been updated,
+the updated value will be returned.&nbsp; Fields can be reference by name
+or number (0 to FieldCount-1).</td>
+
+<td>Variant</td>
+</tr>
+
+<tr>
+<td>Table</td>
+
+<td>Returns the name of table that the field belongs to.&nbsp; Fields can
+be reference by name or number (0 to FieldCount-1).</td>
+
+<td>String</td>
+</tr>
+
+<tr>
+<td>Flags</td>
+
+<td>Returns the attributes for the field.&nbsp; Do a bitwise AND on the
+return value with one of the MYSQL_FIELD_FLAGS to determine if the attribute
+is true.&nbsp; Fields can be reference by name or number (0 to FieldCount-1).</td>
+
+<td>MYSQL_FIELD_FLAGS</td>
+</tr>
+
+<tr>
+<td>Length</td>
+
+<td>Returns the length of the field as specified in the CREATE TABLE statement.&nbsp;
+Fields can be reference by name or number (0 to FieldCount-1).</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>MaxLength</td>
+
+<td>Returns the length of the longest field value present in the result
+set.&nbsp; Fields can be reference by name or number (0 to FieldCount-1).</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>Decimals</td>
+
+<td>Return the number of decimals for numeric fields, zero for non-numeric
+fields.&nbsp; Fields can be reference by name or number (0 to FieldCount-1).</td>
+
+<td>Long</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<br>&nbsp;
+<table BORDER COLS=1 WIDTH="100%" >
+<tr>
+<td ALIGN=CENTER BGCOLOR="#7057E7"><a NAME="MYSQL_ERR"></a><b>MYSQL_ERR</b>
+(not creatable)</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Property</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Type</b></td>
+</tr>
+
+<tr>
+<td>Number</td>
+
+<td>Returns the error number.&nbsp; After an attempted connection or query,
+a non-zero value for this property will indicate an error.</td>
+
+<td>Long</td>
+</tr>
+
+<tr>
+<td>Description</td>
+
+<td>Returns the error description.</td>
+
+<td>String</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table BORDER WIDTH="100%" >
+<tr>
+<td BGCOLOR="#7057E7"><b>Method</b></td>
+
+<td BGCOLOR="#7057E7"><b>Description</b></td>
+
+<td BGCOLOR="#7057E7"><b>Return Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Type</b></td>
+
+<td BGCOLOR="#7057E7"><b>Parameter Description</b></td>
+</tr>
+
+<tr>
+<td>Clear</td>
+
+<td>Clears the current error number and description.</td>
+
+<td>None</td>
+
+<td>None</td>
+
+<td>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p>Copyright (C) 2000,2001 icarz, Inc.&nbsp; MyVbQL.dll falls under the
+terms of the <a href="LGPL.txt">GNU Library General Public License</a>.
+<br>Please send questions, comments, and changes to <a href="mailto:mysql@icarz.com">mysql@icarz.com</a>
+<br>&nbsp;
+</body>
+</html>
